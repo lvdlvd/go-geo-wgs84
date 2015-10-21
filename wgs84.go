@@ -29,6 +29,9 @@ package wgs84
 
 import "math"
 
+// The global constant and variable names are not go-idiomatic
+// because they were transliterated from the C++ orignal with minimal changes.
+
 const (
 	WGS84_a = 6378137.             // Equatorial radius in meters
 	WGS84_f = 1. / 298.25722210088 // Flattening of the ellipsoid
