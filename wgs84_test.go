@@ -2,10 +2,8 @@
 // Use of this source code is governed by the Apache License 2.0
 // that can be found in the LICENSE file.
 
-//
 // Test by comparing against an independent implementation of the inverse problem,
 // published by Gerald I. Evenden.  I understand this is in the public domain.
-//
 package wgs84
 
 import (
@@ -13,7 +11,7 @@ import (
 	"testing"
 )
 
-const tol = 5E-10
+const tol = 5e-10
 
 func rad(deg float64) float64 { return deg * (math.Pi / 180.0) }
 func deg(rad float64) float64 { return rad * (180.0 / math.Pi) }
@@ -54,19 +52,19 @@ func TestTwo(t *testing.T) {
 }
 
 var (
-	lats = [...]float64{0, 30, 45, 60, 89,  33., 42.  } 
-	lons = [...]float64{0, 15, 45, 60, -91.5, -86.25 } 
+	lats = [...]float64{0, 30, 45, 60, 89, 33., 42.}
+	lons = [...]float64{0, 15, 45, 60, -91.5, -86.25}
 )
 
 func TestForward(t *testing.T) {
 	for _, lat1 := range lats {
 		for _, lon1 := range lons {
 			for _, azi1 := range lons {
-			for s := 1000.; s < 10001; s += 1000 {
+				for s := 1000.; s < 10001; s += 1000 {
 					lat2, lon2, azi2 := Forward(rad(lat1), rad(lon1), rad(azi1), s)
 					rs, razi1, razi2 := inv_geodesic(rad(lat1), rad(lon1), lat2, lon2)
 
-					if e := math.Abs(rs - s) / s; !(e < 1E-5) {
+					if e := math.Abs(rs-s) / s; !(e < 1e-5) {
 						t.Errorf("(%g,%g) -> (%g,%g) bad dist %g, %g", lat1, lon1, lat2, lon2, rs, s)
 					} else if !(s < tol) {
 						if e := math.Abs(rad(azi1) - razi1); !(e < tol) {
@@ -76,8 +74,6 @@ func TestForward(t *testing.T) {
 							t.Errorf("(%g,%g) -> (%g,%g) bad baz %g %g", lat1, lon1, lat2, lon2, deg(azi2), deg(razi2))
 						}
 					}
-
-
 
 				}
 			}
@@ -94,10 +90,10 @@ func TestInverse(t *testing.T) {
 						continue
 					}
 
-					s,  faz, baz := Inverse(rad(lat1), rad(lon1), rad(lat2), rad(lon2))
+					s, faz, baz := Inverse(rad(lat1), rad(lon1), rad(lat2), rad(lon2))
 					rs, rfaz, rbaz := inv_geodesic(rad(lat1), rad(lon1), rad(lat2), rad(lon2))
 
-					if e := math.Abs(rs - s) / s; !(e < 1E-5) {
+					if e := math.Abs(rs-s) / s; !(e < 1e-5) {
 						t.Errorf("(%g,%g) -> (%g,%g) bad dist %g, %g", lat1, lon1, lat2, lon2, rs, s)
 					} else if !(s < tol) {
 						if e := math.Abs(rfaz - faz); !(e < tol) {
@@ -151,7 +147,7 @@ func inv_geodesic(phi1, lam1, phi2, lam2 float64) (s, faz, baz float64) {
 		f   = WGS84_f
 		a   = WGS84_a
 		r   = 1. - f
-		eps = 5E-14 // orig says 5E-14
+		eps = 5e-14 // orig says 5E-14
 	)
 
 	tu1 := r * math.Tan(phi1)
@@ -210,7 +206,7 @@ func inv_geodesic(phi1, lam1, phi2, lam2 float64) (s, faz, baz float64) {
 /*
 // Check on the Clark 66 ellipsoid.  set the constants f and a to these instead:
 const (
-	CLARK66_a = 6378206.4 
+	CLARK66_a = 6378206.4
 	CLARK66_f = 1 / 294.9786982138
 
 	WGS84_a   = 6378137             // Equatorial radius in meters

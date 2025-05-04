@@ -4,7 +4,7 @@
 //
 // This is a translation of a part of GeographicLib-1.15 to Go.
 //
-// Original copyright notice: 
+// Original copyright notice:
 // Copyright (c) Charles Karney (2011) <charles@karney.com> and licensed
 // under the MIT/X11 License.  For more information, see
 //     http://geographiclib.sourceforge.net/
@@ -32,7 +32,7 @@ type GeodesicLine struct {
 	salp0, calp0, k2                                       float64
 	salp1, calp1, ssig1, csig1, stau1, ctau1, somg1, comg1 float64
 	_A1m1, _A2m1, _A3c, _B11, _B21, _B31, _A4, _B41        float64
-	// index zero elements of C1a, C1pa, C2a, C3a are unused, 
+	// index zero elements of C1a, C1pa, C2a, C3a are unused,
 	// all the elements of C4a are used
 	_C1a  [_nC1 + 1]float64
 	_C1pa [_nC1p + 1]float64

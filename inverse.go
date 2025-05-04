@@ -4,7 +4,7 @@
 //
 // This is a translation of a part of GeographicLib-1.15 to Go.
 //
-// Original copyright notice: 
+// Original copyright notice:
 // Copyright (c) Charles Karney (2011) <charles@karney.com> and licensed
 // under the MIT/X11 License.  For more information, see
 //     http://geographiclib.sourceforge.net/
@@ -19,7 +19,9 @@ import (
 )
 
 func sg(x bool) float64 {
-	if x { return 1 }
+	if x {
+		return 1
+	}
 	return -1
 }
 
@@ -186,7 +188,7 @@ func Inverse(lat1, lon1, lat2, lon2 float64) (s12, azi1, azi2 float64) {
 			for trip := 0; numit < _maxit; numit++ {
 				var v, dv float64
 
-				v, salp2, calp2, sig12, ssig1, csig1, ssig2, csig2, eps, omg12, dv = 
+				v, salp2, calp2, sig12, ssig1, csig1, ssig2, csig2, eps, omg12, dv =
 					lambda12(sbet1, cbet1, sbet2, cbet2, salp1, calp1, trip < 1, C1a[:], C2a[:], C3a[:])
 				v -= lam12
 
@@ -231,8 +233,10 @@ func Inverse(lat1, lon1, lat2, lon2 float64) (s12, azi1, azi2 float64) {
 		calp1, calp2 = calp2, calp1
 	}
 
-	salp1 *= swapp * lonsign; calp1 *= swapp * latsign;
-	salp2 *= swapp * lonsign; calp2 *= swapp * latsign;
+	salp1 *= swapp * lonsign
+	calp1 *= swapp * latsign
+	salp2 *= swapp * lonsign
+	calp2 *= swapp * latsign
 
 	// minus signs give range [-180, 180). 0- converts -0 to +0.
 	azi1 = 0 - math.Atan2(-salp1, calp1)

@@ -4,7 +4,7 @@
 //
 // This is a translation of a part of GeographicLib-1.15 to Go.
 //
-// Original copyright notice: 
+// Original copyright notice:
 // Copyright (c) Charles Karney (2011) <charles@karney.com> and licensed
 // under the MIT/X11 License.  For more information, see
 //     http://geographiclib.sourceforge.net/
@@ -23,8 +23,8 @@
 // function is Geodesic::GenInverse.
 //
 // The documentation for the Original C++ classes can be found at
-//     http://geographiclib.sourceforge.net/html/annotated.html
 //
+//	http://geographiclib.sourceforge.net/html/annotated.html
 package wgs84
 
 import "math"
@@ -38,8 +38,10 @@ const (
 )
 
 // Evaluate
-//  sum(c[i] * sin( 2*i    * x), i, 1, n) 
-//  sum(c[i] * cos((2*i+1) * x), i, 0, n-1)
+//
+//	sum(c[i] * sin( 2*i    * x), i, 1, n)
+//	sum(c[i] * cos((2*i+1) * x), i, 0, n-1)
+//
 // using Clenshaw summation.  N.B. c[0] is unused for sin series
 func sinSeries(sinx, cosx float64, c []float64, n int) float64 {
 	cp := n + 1
@@ -218,8 +220,8 @@ func c3f(eps float64, c []float64) {
 }
 
 var (
-	_tiny    = math.Sqrt((1<<52)*math.SmallestNonzeroFloat64) // sqrt(smallest normalized number)
-	_tol0    = 1.0 / (1<<52)  // epsilon for a 52 bit mantissa
+	_tiny    = math.Sqrt((1 << 52) * math.SmallestNonzeroFloat64) // sqrt(smallest normalized number)
+	_tol0    = 1.0 / (1 << 52)                                    // epsilon for a 52 bit mantissa
 	_tol1    = 200 * _tol0
 	_tol2    = math.Sqrt(_tol0)
 	_xthresh = 1000 * _tol2
